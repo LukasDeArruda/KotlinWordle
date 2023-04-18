@@ -76,12 +76,18 @@ class MainActivity : AppCompatActivity() {
     fun enterHandler(view: View) {
         // No change to game state if the word is incomplete
         // grab text from textView and concatenate
-
+        guess = ""
         getGuess()
-        if(guess.length == 5)
+        if(guess.length == 5 && legitGuess())
         {
             row += 1
             col = 1
+            // Mostly for debugging
+            findViewById<TextView>(R.id.message).text = "Valid Guess"
+        }
+        else
+        {
+            findViewById<TextView>(R.id.message).text = "Invalid Guess"
         }
         // No change to game state if the word is not in dictionary
 
@@ -108,6 +114,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateButtonColor(letter: String, color: Int) {
 
         // Pick the best color for the button
+
 
 
         // Green beats yellow and gray
