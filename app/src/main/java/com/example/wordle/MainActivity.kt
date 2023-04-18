@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         wordList = BufferedReader(InputStreamReader(resources.openRawResource(resources.getIdentifier("wordle", "raw", packageName)))).readLines()
         word = wordList.random()
         findViewById<TextView>(R.id.message).text = "The word is $word"
+
     }
     private var row = 1
     private var col = 1
@@ -51,7 +52,10 @@ class MainActivity : AppCompatActivity() {
 
         // when a user press a letter, show the letter to current textView
         getTextView(row, col).text = (view as Button).text.toString()
-
+        if(col < 5)
+        {
+            col += 1
+        }
         //println((view as Button).text.toString())     // for debugging
         // advance cursor to next textView
 
@@ -76,7 +80,8 @@ class MainActivity : AppCompatActivity() {
         colorCode()
         // If we got here, the guessed word is in the dictionary
         // If it matches the word, the game is over
-
+        row += 1
+        col = 1
         // If we're on the last row, the game is over
 
     }
@@ -113,4 +118,5 @@ class MainActivity : AppCompatActivity() {
         // Otherwise, highlight non-matches with a black background
 
     }
+
 }
