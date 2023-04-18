@@ -78,12 +78,21 @@ class MainActivity : AppCompatActivity() {
         // grab text from textView and concatenate
         guess = ""
         getGuess()
-        if(guess.length == 5 && legitGuess())
+        if (gameOver){
+
+        }
+        else if(guess.length == 5 && legitGuess())
         {
+            if (guess.lowercase() == word){
+                gameOver = true
+                findViewById<TextView>(R.id.message).text = "You win!"
+            }
+            else{
             row += 1
             col = 1
             // Mostly for debugging
             findViewById<TextView>(R.id.message).text = "Valid Guess"
+            }
         }
         else
         {
