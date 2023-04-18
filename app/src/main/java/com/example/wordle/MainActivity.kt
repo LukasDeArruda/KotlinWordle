@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var wordList : List<String>
     private lateinit var word : String
     private var gameOver = false
-    private var guess = "     ";
+    private var guess = "";
 
     private fun legitGuess():Boolean = guess.lowercase() in wordList
 
@@ -77,17 +77,12 @@ class MainActivity : AppCompatActivity() {
         // No change to game state if the word is incomplete
         // grab text from textView and concatenate
 
-        var userGuess = ""
-        for(i in 1..5)
-        {
-            userGuess += (getTextView(row, i).text)
-        }
-        if(userGuess.length == 5)
+        getGuess()
+        if(guess.length == 5)
         {
             row += 1
             col = 1
         }
-
         // No change to game state if the word is not in dictionary
 
         // At this point, reveal the game state
@@ -100,7 +95,11 @@ class MainActivity : AppCompatActivity() {
     }
     // grab text from textView and concatenate
     private fun getGuess() {
-
+        guess = ""
+        for(i in 1..5)
+        {
+            guess += (getTextView(row, i).text)
+        }
     }
     private fun updateTextColor(row: Int, col: Int, color: Int) {
 
