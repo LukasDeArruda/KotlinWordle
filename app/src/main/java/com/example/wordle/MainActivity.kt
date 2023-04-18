@@ -62,10 +62,15 @@ class MainActivity : AppCompatActivity() {
     }
     // themes.xml - OnClickListener for back space
     fun backspaceHandler(view: View) {
-        // if game is over, just return
-        // if we went past the end, so clamp down
-        // Go back if we advanced
-        // Erase the text
+        if (gameOver) { return }
+        if (col == 1){getTextView(row, col).text = ""}
+        else if (col == 5 && getTextView(row, col).text != ""){
+            getTextView(row, col).text = ""
+        }
+        else {
+            col--
+            getTextView(row, col).text = ""
+        }
     }
     // themes.xml - OnClickListener for enter
     fun enterHandler(view: View) {
