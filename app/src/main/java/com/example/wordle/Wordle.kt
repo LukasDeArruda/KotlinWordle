@@ -132,8 +132,8 @@ fun gameOver(userInput: String, word: String):Boolean{
 
 fun main(){
     //val targetWord = selectWord()
-    val targetWord = "quite"
-    //println("The target word is ***$targetWord***")
+    val targetWord = randomWord()
+    println("The target word is ***$targetWord***")
     var guess = ""
     for (turn in 1..6){
         when (turn){
@@ -164,3 +164,6 @@ fun main(){
             }
     }
 }}
+fun randomWord():String {
+    return File("wordle.txt").readLines().random()
+}
