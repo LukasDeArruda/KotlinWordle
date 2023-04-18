@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
     // themes.xml - OnClickListener for back space
     fun backspaceHandler(view: View) {
         // if game is over, just return
-
         // if we went past the end, so clamp down
         // Go back if we advanced
         // Erase the text
@@ -71,8 +70,18 @@ class MainActivity : AppCompatActivity() {
     // themes.xml - OnClickListener for enter
     fun enterHandler(view: View) {
         // No change to game state if the word is incomplete
-
         // grab text from textView and concatenate
+
+        var userGuess = ""
+        for(i in 1..5)
+        {
+            userGuess += (getTextView(row, i).text)
+        }
+        if(userGuess.length == 5)
+        {
+            row += 1
+            col = 1
+        }
 
         // No change to game state if the word is not in dictionary
 
@@ -80,8 +89,7 @@ class MainActivity : AppCompatActivity() {
         colorCode()
         // If we got here, the guessed word is in the dictionary
         // If it matches the word, the game is over
-        row += 1
-        col = 1
+
         // If we're on the last row, the game is over
 
     }
