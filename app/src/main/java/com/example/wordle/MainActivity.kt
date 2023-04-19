@@ -6,14 +6,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import org.w3c.dom.Text
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
     private lateinit var wordList : List<String>
-    private lateinit var word : String
+    lateinit var word : String
     private var gameOver = false
-    private var guess = "";
+    var guess = "";
 
     private fun legitGuess():Boolean = guess.lowercase() in wordList
 
@@ -76,7 +77,6 @@ class MainActivity : AppCompatActivity() {
     fun enterHandler(view: View) {
         // No change to game state if the word is incomplete
         // grab text from textView and concatenate
-        guess = ""
         getGuess()
         if (gameOver){
 
@@ -84,14 +84,16 @@ class MainActivity : AppCompatActivity() {
         else if(guess.length == 5 && legitGuess())
         {
             if (guess.lowercase() == word){
+                colorCode()
                 gameOver = true
                 findViewById<TextView>(R.id.message).text = "You win!"
             }
             else{
-            row += 1
-            col = 1
-            // Mostly for debugging
-            findViewById<TextView>(R.id.message).text = "Valid Guess"
+                colorCode()
+                row += 1
+                col = 1
+                // Mostly for debugging
+                findViewById<TextView>(R.id.message).text = "Valid Guess"
             }
         }
         else
@@ -101,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         // No change to game state if the word is not in dictionary
 
         // At this point, reveal the game state
-        colorCode()
+
         // If we got here, the guessed word is in the dictionary
         // If it matches the word, the game is over
 
@@ -116,25 +118,35 @@ class MainActivity : AppCompatActivity() {
             guess += (getTextView(row, i).text)
         }
     }
-    private fun updateTextColor(row: Int, col: Int, color: Int) {
-
-    }
-    private val colorMap = mutableMapOf<String,Int>()
-    private fun updateButtonColor(letter: String, color: Int) {
-
-        // Pick the best color for the button
-
-
-
-        // Green beats yellow and gray
-
-        // Yellow beats gray
-
-    }
 
     // based on a map<letter, occurrence>, update textView colors and keyboard button colors
     private fun colorCode() {
         // Store user's guess as array of strings. Five letters, index 0 to 4.
+        val answerMap = countCharacterOccurrences(word)
+        getGuess()
+        for(i in 0..4)
+        {
+
+            if (word[i].toString() == guess[i].lowercase())
+            {
+                getTextView(row, i+1).setBackgroundResource(R.color.green)
+            }
+            else if(answerMap.contains(guess[i].lowercaseChar()))
+            {
+                getTextView(row, i+1).setBackgroundResource(R.color.yellow)
+            }
+            else
+            {
+                getTextView(row, i+1).setBackgroundResource(R.color.gray)
+            }
+        }
+        // THIS WORKS
+//        for(i in 0..4)
+//        {
+//            getTextView(row, i+1).setBackgroundResource(R.color.green)
+//        }
+
+
 
         // First, highlight in green where the characters lined up properly
 
