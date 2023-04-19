@@ -130,14 +130,17 @@ class MainActivity : AppCompatActivity() {
             if (word[i].toString() == guess[i].lowercase())
             {
                 getTextView(row, i+1).setBackgroundResource(R.color.green)
+                getButton(guess[i].toString()).setBackgroundColor(getColor(R.color.green))
             }
             else if(answerMap.contains(guess[i].lowercaseChar()))
             {
                 getTextView(row, i+1).setBackgroundResource(R.color.yellow)
+                getButton(guess[i].toString()).setBackgroundColor(getColor(R.color.yellow))
             }
             else
             {
                 getTextView(row, i+1).setBackgroundResource(R.color.gray)
+                getButton(guess[i].toString()).setBackgroundColor(getColor(R.color.gray))
             }
         }
         // THIS WORKS
@@ -145,6 +148,8 @@ class MainActivity : AppCompatActivity() {
 //        {
 //            getTextView(row, i+1).setBackgroundResource(R.color.green)
 //        }
+
+        getButton("a").setBackgroundColor(getColor(R.color.green))
 
 
 
